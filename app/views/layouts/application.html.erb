@@ -12,9 +12,22 @@
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v6.1.2/css/all.css">
   </head>
 
-  <body>
-    <div class="container my-4">
-      <%= yield %>
-    </div>
   </body>
+    <nav class="navbar navbar-light shadow-sm py-3" style="background-color: #e3f2fd;">
+        <div class="container-fluid">
+          <a class="navbar-brand" href="#">Simple Airbnb</a>
+          <form class="d-flex" role="search">
+            <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+            <button class="btn btn-outline-success" type="submit">Search</button>
+          </form>
+        </div>
+      </nav>
+
+    <!-- CONTEÚDO limitado -->
+    <main class="container my-4">
+      <%= yield %>
+    </main>
+ </body>
 </html>
+
+

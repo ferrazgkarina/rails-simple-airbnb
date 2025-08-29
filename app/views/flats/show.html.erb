@@ -1,11 +1,23 @@
-<h3><%= @flat.name %></h3>
+<div class="card mb-4">
+  <% if @flat.picture_url.present? %>
+    <img src="<%= @flat.picture_url %>" class="card-img-top" alt="<%= @flat.name %>" style="height: 400px; object-fit: cover;">
+  <% else %>
+    <img src="https://via.placeholder.com/800x400" class="card-img-top" alt="No image available">
+  <% end %>
 
-<p><%= @flat.description %></p>
-<p><%= @flat.address %></p>
-<p><%= @flat.price_per_night %></p>
-<p><%= @flat.number_of_guests %></p>
+  <div class="card-body">
+    <h3 class="card-title"><%= @flat.name %></h3>
+    <p class="card-text"><%= @flat.description %></p>
+    <p><strong>Address:</strong> <%= @flat.address %></p>
+    <p><strong>Price per night:</strong> € <%= @flat.price_per_night %></p>
+    <p><strong>Number of guests:</strong> <%= @flat.number_of_guests %></p>
+  </div>
+</div>
 
-<p><%= link_to "Edit flat", edit_flat_path %>
-<p><%= link_to "Remove flat", flat_path(@flat), data: {turbo_method: :delete, turbo_confirm: "Are you sure?"} %>
-
-<%= link_to "Back to flats list", flats_path %>
+<div class="d-flex gap-2">
+  <%= link_to "Edit flat", edit_flat_path(@flat), class: "btn btn-primary" %>
+  <%= link_to "Remove flat", flat_path(@flat),
+              data: { turbo_method: :delete, turbo_confirm: "Are you sure?" },
+              class: "btn btn-danger" %>
+  <%= link_to "Back to flats", flats_path, class: "btn btn-dark" %>
+</div>

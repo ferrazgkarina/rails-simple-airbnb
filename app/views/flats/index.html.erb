@@ -1,35 +1,29 @@
-<nav class="navbar m-3" style="background-color: #e3f2fd;">
-  <div class="container-fluid">
-    <a class="navbar-brand">Simple Airbnb</a>
-    <form class="d-flex">
-      <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-      <button class="btn btn-outline-success" type="submit">Search</button>
-    </form>
-  </div>
-</nav>
+
 
 <main class="container my-4">
-  <p class="h2 p-3">Flats available</p>
-  <a class="btn btn-primary" href="/flats/new">Add new flat</a>
+  <div class="d-flex justify-content-between align-items-center mb-3">
+    <h2 class="mb-0">Flats available</h2>
+    <%= link_to "Add new flat", new_flat_path, class: "btn btn-primary" %>
+  </div>
 
-  <div class="row row-cols-1 row-cols-md-3 g-4 m-1">
-    <% @flats.each do |flat| %>
-      <div class="col">
-        <div class="card h-100">
-          <% if flat.picture_url.present? %>
-          <img src="<%= flat.picture_url %>" class="card-img-top" alt="<%= flat.name %>">
-          <% end %>
-          <div class="card-body">
-            <h5 class="card-title"><%= flat.name %></h5>
-            <p><strong>Address:</strong> <%= flat.address %></p>
-            <p><strong>€</strong> <%= flat.price_per_night %></p>
-            <p><strong><i class="fa-solid fa-person"></i></strong> <%= flat.number_of_guests %></p>
-            <%= link_to "Visit flat", flat_path(flat), class: "btn btn-primary" %>
+  <div class="row row-cols-1 row-cols-md-3 g-4">
+  <% @flats.each do |flat| %>
+    <div class="col">
+      <div class="card h-100 shadow-sm">
+        <% if flat.picture_url.present? %>
+          <img src="<%= flat.picture_url %>" class="card-img-top" alt="<%= flat.name %>" style="height: 200px; object-fit: cover;">
+        <% end %>
+
+        <div class="card-body">
+          <h5 class="card-title fw-bold"><%= flat.name %></h5>
+          <p class="text-muted mb-2"><%= flat.address %></p>
+          <div class="d-flex gap-3 mb-3 text-muted">
+            <span><i class="fa-solid fa-user-group"></i> <%= flat.number_of_guests %></span>
+            <span><i class="fa-solid fa-euro-sign"></i> <%= flat.price_per_night %></span>
           </div>
+          <%= link_to "More info", flat_path(flat), class: "text-decoration-none fw-semibold text-primary" %>
         </div>
       </div>
-    <% end %>
-  </div>
-</main>
-
-<%= link_to "Add new flat", new_flat_path %>
+    </div>
+  <% end %>
+</div>
