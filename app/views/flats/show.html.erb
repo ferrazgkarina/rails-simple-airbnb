@@ -1,23 +1,72 @@
-<div class="card mb-4">
-  <% if @flat.picture_url.present? %>
-    <img src="<%= @flat.picture_url %>" class="card-img-top" alt="<%= @flat.name %>" style="height: 400px; object-fit: cover;">
-  <% else %>
-    <img src="https://via.placeholder.com/800x400" class="card-img-top" alt="No image available">
-  <% end %>
+<div class="container my-5">
+  <div class="row justify-content-center">
+    <div class="col-12 col-md-8 col-lg-10">
+      <div class="card shadow-sm">
+        <% if @flat.picture_url.present? %>
+          <img src="<%= @flat.picture_url %>"
+               class="card-img-top"
+               alt="<%= @flat.name %>"
+               style="height: 420px; object-fit: cover;">
+        <% end %>
 
-  <div class="card-body">
-    <h3 class="card-title"><%= @flat.name %></h3>
-    <p class="card-text"><%= @flat.description %></p>
-    <p><strong>Address:</strong> <%= @flat.address %></p>
-    <p><strong>Price per night:</strong> € <%= @flat.price_per_night %></p>
-    <p><strong>Number of guests:</strong> <%= @flat.number_of_guests %></p>
+        <div class="card-body">
+          <div class="row row-cols-1 row-cols-lg-2 g-8">
+            <div>
+              <h2 class="mb-2"><%= @flat.name %></h2>
+              <p class="text-muted mb-2"><%= @flat.address %></p>
+              <div class="d-flex gap-3 mb-3 text-muted">
+                <span><i class="fa-solid fa-user-group"></i> <%= @flat.number_of_guests %> guests</span>
+                <span><i class="fa-solid fa-euro-sign"></i> <%= @flat.price_per_night %> / night</span>
+              </div>
+              <p><%= @flat.description %></p>
+
+              <div class="d-flex flex-wrap gap-2 mt-6">
+                <%= link_to "Edit flat", edit_flat_path(@flat), class: "btn btn-primary" %>
+                <%= link_to "Remove flat", flat_path(@flat),
+                            data: { turbo_method: :delete, turbo_confirm: "Are you sure?" },
+                            class: "btn btn-danger" %>
+                <%= link_to "Back to flats", flats_path, class: "btn btn-secondary" %>
+              </div>
+            </div>
+            <div>
+              <div class="border rounded p-3 bg-light h-100">
+                <div class="d-flex justify-content-between align-items-baseline mb-3">
+                  <h5 class="mb-0">Book this flat</h5>
+                  <span class="text-muted">
+                    <i class="fa-solid fa-euro-sign"></i> <%= @flat.price_per_night %>/night
+                  </span>
+                </div>
+
+                <form>
+                  <div class="mb-2">
+                    <label for="checkin" class="form-label">Check-in</label>
+                    <input type="date" class="form-control" id="checkin">
+                  </div>
+
+                  <div class="mb-2">
+                    <label for="checkout" class="form-label">Check-out</label>
+                    <input type="date" class="form-control" id="checkout">
+                  </div>
+
+                  <div class="mb-3">
+                    <label for="guests" class="form-label">Guests</label>
+                    <input type="number" class="form-control" id="guests"
+                           min="1" max="<%= @flat.number_of_guests %>" value="1">
+                  </div>
+
+                  <div class="d-flex justify-content-between align-items-center mb-3 small text-muted">
+                    <span>Total (est.):</span>
+                    <strong id="booking-total">—</strong>
+                  </div>
+
+                  <button type="submit" class="btn btn-success w-100">Reserve</button>
+                </form>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
-</div>
-
-<div class="d-flex gap-2">
-  <%= link_to "Edit flat", edit_flat_path(@flat), class: "btn btn-primary" %>
-  <%= link_to "Remove flat", flat_path(@flat),
-              data: { turbo_method: :delete, turbo_confirm: "Are you sure?" },
-              class: "btn btn-danger" %>
-  <%= link_to "Back to flats", flats_path, class: "btn btn-dark" %>
 </div>

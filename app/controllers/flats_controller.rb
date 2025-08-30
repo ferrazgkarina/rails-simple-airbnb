@@ -1,6 +1,11 @@
 class FlatsController < ApplicationController
   def index
     @flats = Flat.all
+
+    if params[:address].present?
+    q = params[:address].to_s.strip.downcase
+    @flats = @flats.where("LOWER(address) LIKE ?", "%#{q}%")
+  end
   end
 
   def new

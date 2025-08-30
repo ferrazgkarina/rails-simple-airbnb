@@ -1,11 +1,16 @@
 
-
-<%= simple_form_for(@flat) do |f| %>
-  <%= f.input :name %>
-  <%= f.input :description %>
-  <%= f.input :address %>
-  <%= f.input :price_per_night %>
-  <%= f.input :number_of_guests %>
-  <%= f.input :picture_url %>
-  <%= f.submit "Save flat", class: "btn btn-primary" %>
-<% end %>
+<div class="container my-5">
+  <div class="row justify-content-center">
+    <div class="col-md-6">
+      <%= simple_form_for(@flat) do |f| %>
+        <%= f.input :name %>
+        <%= f.input :description %>
+        <%= f.input :address %>
+        <%= f.input :price_per_night %>
+        <%= f.input :number_of_guests %>
+        <%= f.input :picture_url %>
+        <%= f.submit "Save flat", class: "btn btn-primary" %>
+      <% end %>
+    </div>
+  </div>
+</div>>
